@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: avai_lab
+Version: 0.0.1
+Summary: functionality for the race car project
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: numpy
+Requires-Dist: pydantic
+Requires-Dist: tomlkit
+Requires-Dist: pynput
+Requires-Dist: shapely
+Requires-Dist: scipy
+Provides-Extra: docs
+Requires-Dist: mkdocs; extra == "docs"
+Requires-Dist: mkdocs-material; extra == "docs"
+Requires-Dist: mkdocstrings-python; extra == "docs"

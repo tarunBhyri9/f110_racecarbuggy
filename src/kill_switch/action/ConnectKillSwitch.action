@@ -1,0 +1,10 @@
+# Goal
+bool connect
+
+---
+# Result
+bool acknowledged
+
+---
+# Feedback
+string status

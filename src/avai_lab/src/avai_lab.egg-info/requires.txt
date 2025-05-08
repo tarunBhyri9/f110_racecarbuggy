@@ -1,0 +1,11 @@
+numpy
+pydantic
+tomlkit
+pynput
+shapely
+scipy
+
+[docs]
+mkdocs
+mkdocs-material
+mkdocstrings-python
