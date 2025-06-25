@@ -4,6 +4,7 @@ import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionServer, CancelResponse, GoalResponse
 from kill_switch.action import ConnectKillSwitch
+from geometry_msgs.msg import Twist
 
 class KillSwitchServer(Node):
     def __init__(self):
@@ -18,6 +19,8 @@ class KillSwitchServer(Node):
             cancel_callback=self.cancel_callback
         )
 
+        self.cmd_vel_publisher = self.create_publisher(Twist, '/cmd_vel', 10)
+
         self.get_logger().info("Kill Switch Action Server is active.")
 
     def goal_callback(self, goal_request):
@@ -26,7 +29,14 @@ class KillSwitchServer(Node):
 
     def cancel_callback(self, goal_handle):
         self.get_logger().warn("Kill Switch disconnected! Initiating emergency stop.")
-        # TODO: We'll add /drive stop publishing here next
+        
+        #Creating zero motion by stopping msg Twist
+        stop_msg = Twist()
+        stop_msg.linear.x = 0.0
+        stop_msg.angular.z = 0.0
+
+        #And to publish this stop_msg tp /cmd_vel
+        self.cmd_vel_publisher(stop_msg)
         return CancelResponse.ACCEPT
 
     async def execute_callback(self, goal_handle):
